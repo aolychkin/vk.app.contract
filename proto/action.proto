@@ -13,7 +13,7 @@ message GetActionsByBoardRequest {
 }
 
 message GetActionsByBoardResponse {
-  repeated DTOAction cards = 1;
+  repeated DTOCard cards = 1;
   repeated DTOFieldConfig field_configs = 2;
 }
 
