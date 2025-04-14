@@ -19,14 +19,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BoardService_GetBoard_FullMethodName = "/board.BoardService/GetBoard"
+	BoardService_GetBoard_FullMethodName      = "/board.BoardService/GetBoard"
+	BoardService_GetBoardCards_FullMethodName = "/board.BoardService/GetBoardCards"
 )
 
 // BoardServiceClient is the client API for BoardService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// TODO: сделать запросы менее жирными. Отправлять только то, что нужно для модуля доски
 type BoardServiceClient interface {
 	GetBoard(ctx context.Context, in *GetBoardRequest, opts ...grpc.CallOption) (*GetBoardResponse, error)
+	GetBoardCards(ctx context.Context, in *GetBoardCardsRequest, opts ...grpc.CallOption) (*GetBoardCardsResponse, error)
 }
 
 type boardServiceClient struct {
@@ -47,11 +51,24 @@ func (c *boardServiceClient) GetBoard(ctx context.Context, in *GetBoardRequest, 
 	return out, nil
 }
 
+func (c *boardServiceClient) GetBoardCards(ctx context.Context, in *GetBoardCardsRequest, opts ...grpc.CallOption) (*GetBoardCardsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBoardCardsResponse)
+	err := c.cc.Invoke(ctx, BoardService_GetBoardCards_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BoardServiceServer is the server API for BoardService service.
 // All implementations must embed UnimplementedBoardServiceServer
 // for forward compatibility.
+//
+// TODO: сделать запросы менее жирными. Отправлять только то, что нужно для модуля доски
 type BoardServiceServer interface {
 	GetBoard(context.Context, *GetBoardRequest) (*GetBoardResponse, error)
+	GetBoardCards(context.Context, *GetBoardCardsRequest) (*GetBoardCardsResponse, error)
 	mustEmbedUnimplementedBoardServiceServer()
 }
 
@@ -64,6 +81,9 @@ type UnimplementedBoardServiceServer struct{}
 
 func (UnimplementedBoardServiceServer) GetBoard(context.Context, *GetBoardRequest) (*GetBoardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBoard not implemented")
+}
+func (UnimplementedBoardServiceServer) GetBoardCards(context.Context, *GetBoardCardsRequest) (*GetBoardCardsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBoardCards not implemented")
 }
 func (UnimplementedBoardServiceServer) mustEmbedUnimplementedBoardServiceServer() {}
 func (UnimplementedBoardServiceServer) testEmbeddedByValue()                      {}
@@ -104,6 +124,24 @@ func _BoardService_GetBoard_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BoardService_GetBoardCards_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBoardCardsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BoardServiceServer).GetBoardCards(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BoardService_GetBoardCards_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BoardServiceServer).GetBoardCards(ctx, req.(*GetBoardCardsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BoardService_ServiceDesc is the grpc.ServiceDesc for BoardService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +152,10 @@ var BoardService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetBoard",
 			Handler:    _BoardService_GetBoard_Handler,
+		},
+		{
+			MethodName: "GetBoardCards",
+			Handler:    _BoardService_GetBoardCards_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

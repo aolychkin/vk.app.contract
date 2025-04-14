@@ -4,11 +4,15 @@ package board;
 
 option go_package = "neo.board.v1;board_v1";
 
+//TODO: сделать запросы менее жирными. Отправлять только то, что нужно для модуля доски
 service BoardService {
   rpc GetBoard (GetBoardRequest) returns (GetBoardResponse);
+  rpc GetBoardCards (GetBoardCardsRequest) returns (GetBoardCardsResponse);
 }
-//TODO: сделать запросы менее жирными. Отправлять только то, что нужно для модуля доски
+
+// _______________________ //
 // ____ GET BOARD () ____ //
+// _____________________ //
 message GetBoardRequest {
   string id = 1;
   //Сортировка
@@ -23,8 +27,6 @@ message DTOBoard {
   string key = 2; //У задачи должен быть кей ИЛИ проекта
   repeated DTOColumn columns = 3;
   repeated DTOSprint sprints = 4;
-  repeated DTOFieldConfig field_configs = 5;
-  repeated DTOCardConfig card_configs = 6;
 }
 
 // ____ COLUMN DTOYPES ____ //
@@ -32,17 +34,36 @@ message DTOColumn {
   string id = 1;
   string name = 2;
   repeated DTOCurrentStep steps = 3;
-  repeated DTOCard on_board_action = 4;
+  // repeated DTOCard on_board_action = 4;
 }
 message DTOCurrentStep {
   string id = 1;
   string name = 2;
   string workflow_status = 3;
 }
+
+message DTOSprint {
+  string id = 1;
+  string name = 2;
+}
+
+// ________________________ //
+// ____ CARDS DTOYPES ____ //
+// ______________________ //
+message GetBoardCardsRequest {
+  string board_id = 1;
+}
+
+message GetBoardCardsResponse {
+  repeated DTOCard cards = 1;
+  repeated DTOFieldConfig field_configs = 2;
+  repeated DTOCardConfig card_configs = 3;
+}
+
 message DTOCard {
   string id = 1;
   uint32 order = 2;
-  string column_id = 3;
+  // string column_id = 3;
   uint32 action_num = 4;
   string current_step_id = 5;
   repeated string sprint_ids = 6;
@@ -78,10 +99,4 @@ message DTOFieldType {
   string alias = 3;
   bool is_custom = 4;
   repeated string available_sizes = 5;
-}
-
-// ____ OTHER DTOYPES ____ //
-message DTOSprint {
-  string id = 1;
-  string name = 2;
 }
