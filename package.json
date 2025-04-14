@@ -1,0 +1,23 @@
+{
+  "name": "actions-contract",
+  "version": "1.0.0",
+  "description": "proto: protoc -I proto proto/sso/sso.proto --go_out=./gen/go --go_opt=paths=source_relative --go-grpc_out=./gen/go/ --go-grpc_opt=paths=source_relative",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aolychkin/actions-contract.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aolychkin/actions-contract/issues"
+  },
+  "homepage": "https://github.com/aolychkin/actions-contract#readme",
+  "dependencies": {
+    "ts-protoc-gen": "^0.15.0"
+  }
+}

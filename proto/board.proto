@@ -14,65 +14,65 @@ message GetBoardRequest {
   //Сортировка
 }
 message GetBoardResponse {
-  TBoard board = 1;
+  DTOBoard board = 1;
 }
 
-// ____ BOARD TYPES ____ //
-message TBoard {
+// ____ BOARD DTOYPES ____ //
+message DTOBoard {
   string id = 1;
-  string key = 2; //У задачи должен быть кей
-  repeated TColumn columns = 3;
-  repeated TSprint sprints = 4;
-  repeated TFieldConfig field_configs = 5;
-  repeated TCardConfig card_configs = 6;
+  string key = 2; //У задачи должен быть кей ИЛИ проекта
+  repeated DTOColumn columns = 3;
+  repeated DTOSprint sprints = 4;
+  repeated DTOFieldConfig field_configs = 5;
+  repeated DTOCardConfig card_configs = 6;
 }
 
-// ____ COLUMN TYPES ____ //
-message TColumn {
+// ____ COLUMN DTOYPES ____ //
+message DTOColumn {
   string id = 1;
   string name = 2;
-  repeated TCurrentStep steps = 3;
-  repeated TCard on_board_action = 4;
+  repeated DTOCurrentStep steps = 3;
+  repeated DTOCard on_board_action = 4;
 }
-message TCurrentStep {
+message DTOCurrentStep {
   string id = 1;
   string name = 2;
   string workflow_status = 3;
 }
-message TCard {
+message DTOCard {
   string id = 1;
   uint32 order = 2;
   string column_id = 3;
   uint32 action_num = 4;
   string current_step_id = 5;
   repeated string sprint_ids = 6;
-  repeated TActionField fields = 7;
+  repeated DTOActionField fields = 7;
 }
-message TActionField {
+message DTOActionField {
   string id = 1;
   string value = 2;
   string config_id = 3;
 }
 
-// ____ CONFIG TYPES ____ //
+// ____ CONFIG DTOYPES ____ //
 //TODO: отправлять только те поля, которые используются в конфиге доски
-message TCardConfig {
+message DTOCardConfig {
   string id = 1;
   uint32 row_order = 2;
   uint32 column_order = 3;
   uint32 size = 4;
   string field_config_id = 5;
 }
-message TFieldConfig {
+message DTOFieldConfig {
   string id = 1;
   string name = 2;
   string alias = 3;
-  TFieldType field_type = 4;
+  DTOFieldType field_type = 4;
   string defaultValue = 5;
   string availableValues = 7;
 }
 
-message TFieldType {
+message DTOFieldType {
   string id = 1;
   string name = 2;
   string alias = 3;
@@ -80,8 +80,8 @@ message TFieldType {
   repeated string available_sizes = 5;
 }
 
-// ____ OTHER TYPES ____ //
-message TSprint {
+// ____ OTHER DTOYPES ____ //
+message DTOSprint {
   string id = 1;
   string name = 2;
 }

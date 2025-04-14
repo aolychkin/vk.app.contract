@@ -28,7 +28,7 @@ tasks:
     desc: "Generate code from proto files"
     cmds:
       - protoc
-        -I proto/ actions.proto 
+        -I proto/ board.proto 
         --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts
         --js_out=import_style=commonjs,binary:./gen/ts
         --ts_out=service=grpc-web:./gen/ts
