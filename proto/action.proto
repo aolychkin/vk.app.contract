@@ -5,13 +5,59 @@ package action;
 option go_package = "neo.action.v1;action_v1";
 
 service Action {
-  rpc GetAction (GetActionRequest) returns (GetActionResponse);
+  rpc GetActionsByBoard (GetActionsByBoardRequest) returns (GetActionsByBoardResponse);
 }
 
-message GetActionRequest {
+message GetActionsByBoardRequest {
+  string board_id = 1;
+}
+
+message GetActionsByBoardResponse {
+  repeated DTOAction cards = 1;
+  repeated DTOFieldConfig field_configs = 2;
+}
+
+// _____________________________________________ //
+// _______________ GET BOARD () _______________ //
+// Сервис предоставляет данные о действиях.
+// Может быть использовано универсально
+// во всех частях системы.
+// _______________________________________ //
+message DTOCard {
   string id = 1;
+  uint32 order = 2;
+  // string column_id = 3;
+  DTOAction action = 4;
 }
 
-message GetActionResponse {
-  string title = 1;
+message DTOAction {
+  string id = 1;
+  string key = 2;
+  uint32 action_num = 4;
+  string step_id = 5;
+  repeated string sprint_ids = 6;
+  repeated DTOActionField fields = 7;
+}
+message DTOActionField {
+  string id = 1;
+  string value = 2;
+  string config_id = 3;
+}
+
+// ____ CONFIG TYPES ____ //
+message DTOFieldConfig {
+  string id = 1;
+  string name = 2;
+  string alias = 3;
+  DTOFieldType field_type = 4;
+  string defaultValue = 5;
+  string availableValues = 7;
+}
+
+message DTOFieldType {
+  string id = 1;
+  string name = 2;
+  string alias = 3;
+  bool is_custom = 4;
+  repeated string available_sizes = 5;
 }

@@ -19,14 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Action_GetAction_FullMethodName = "/action.Action/GetAction"
+	Action_GetActionsByBoard_FullMethodName = "/action.Action/GetActionsByBoard"
 )
 
 // ActionClient is the client API for Action service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ActionClient interface {
-	GetAction(ctx context.Context, in *GetActionRequest, opts ...grpc.CallOption) (*GetActionResponse, error)
+	GetActionsByBoard(ctx context.Context, in *GetActionsByBoardRequest, opts ...grpc.CallOption) (*GetActionsByBoardResponse, error)
 }
 
 type actionClient struct {
@@ -37,10 +37,10 @@ func NewActionClient(cc grpc.ClientConnInterface) ActionClient {
 	return &actionClient{cc}
 }
 
-func (c *actionClient) GetAction(ctx context.Context, in *GetActionRequest, opts ...grpc.CallOption) (*GetActionResponse, error) {
+func (c *actionClient) GetActionsByBoard(ctx context.Context, in *GetActionsByBoardRequest, opts ...grpc.CallOption) (*GetActionsByBoardResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetActionResponse)
-	err := c.cc.Invoke(ctx, Action_GetAction_FullMethodName, in, out, cOpts...)
+	out := new(GetActionsByBoardResponse)
+	err := c.cc.Invoke(ctx, Action_GetActionsByBoard_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (c *actionClient) GetAction(ctx context.Context, in *GetActionRequest, opts
 // All implementations must embed UnimplementedActionServer
 // for forward compatibility.
 type ActionServer interface {
-	GetAction(context.Context, *GetActionRequest) (*GetActionResponse, error)
+	GetActionsByBoard(context.Context, *GetActionsByBoardRequest) (*GetActionsByBoardResponse, error)
 	mustEmbedUnimplementedActionServer()
 }
 
@@ -62,8 +62,8 @@ type ActionServer interface {
 // pointer dereference when methods are called.
 type UnimplementedActionServer struct{}
 
-func (UnimplementedActionServer) GetAction(context.Context, *GetActionRequest) (*GetActionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAction not implemented")
+func (UnimplementedActionServer) GetActionsByBoard(context.Context, *GetActionsByBoardRequest) (*GetActionsByBoardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetActionsByBoard not implemented")
 }
 func (UnimplementedActionServer) mustEmbedUnimplementedActionServer() {}
 func (UnimplementedActionServer) testEmbeddedByValue()                {}
@@ -86,20 +86,20 @@ func RegisterActionServer(s grpc.ServiceRegistrar, srv ActionServer) {
 	s.RegisterService(&Action_ServiceDesc, srv)
 }
 
-func _Action_GetAction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetActionRequest)
+func _Action_GetActionsByBoard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetActionsByBoardRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ActionServer).GetAction(ctx, in)
+		return srv.(ActionServer).GetActionsByBoard(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Action_GetAction_FullMethodName,
+		FullMethod: Action_GetActionsByBoard_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ActionServer).GetAction(ctx, req.(*GetActionRequest))
+		return srv.(ActionServer).GetActionsByBoard(ctx, req.(*GetActionsByBoardRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -112,8 +112,8 @@ var Action_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ActionServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetAction",
-			Handler:    _Action_GetAction_Handler,
+			MethodName: "GetActionsByBoard",
+			Handler:    _Action_GetActionsByBoard_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

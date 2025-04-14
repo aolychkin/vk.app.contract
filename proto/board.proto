@@ -7,12 +7,14 @@ option go_package = "neo.board.v1;board_v1";
 //TODO: сделать запросы менее жирными. Отправлять только то, что нужно для модуля доски
 service BoardService {
   rpc GetBoard (GetBoardRequest) returns (GetBoardResponse);
-  rpc GetBoardCards (GetBoardCardsRequest) returns (GetBoardCardsResponse);
 }
 
-// _______________________ //
-// ____ GET BOARD () ____ //
-// _____________________ //
+// _____________________________________________ //
+// _______________ GET BOARD () _______________ //
+// Сервис позволяет получить все данные о доске, 
+// как об интерфейсе для отображения действий, 
+// настройках этой доски и ее спецификации  
+// _______________________________________ //
 message GetBoardRequest {
   string id = 1;
   //Сортировка
@@ -27,6 +29,7 @@ message DTOBoard {
   string key = 2; //У задачи должен быть кей ИЛИ проекта
   repeated DTOColumn columns = 3;
   repeated DTOSprint sprints = 4;
+  repeated DTOCardVisualConfig card_configs = 5;
 }
 
 // ____ COLUMN DTOYPES ____ //
@@ -47,56 +50,10 @@ message DTOSprint {
   string name = 2;
 }
 
-// ________________________ //
-// ____ CARDS DTOYPES ____ //
-// ______________________ //
-message GetBoardCardsRequest {
-  string board_id = 1;
-}
-
-message GetBoardCardsResponse {
-  repeated DTOCard cards = 1;
-  repeated DTOFieldConfig field_configs = 2;
-  repeated DTOCardConfig card_configs = 3;
-}
-
-message DTOCard {
-  string id = 1;
-  uint32 order = 2;
-  // string column_id = 3;
-  uint32 action_num = 4;
-  string current_step_id = 5;
-  repeated string sprint_ids = 6;
-  repeated DTOActionField fields = 7;
-}
-message DTOActionField {
-  string id = 1;
-  string value = 2;
-  string config_id = 3;
-}
-
-// ____ CONFIG DTOYPES ____ //
-//TODO: отправлять только те поля, которые используются в конфиге доски
-message DTOCardConfig {
+message DTOCardVisualConfig {
   string id = 1;
   uint32 row_order = 2;
   uint32 column_order = 3;
   uint32 size = 4;
   string field_config_id = 5;
-}
-message DTOFieldConfig {
-  string id = 1;
-  string name = 2;
-  string alias = 3;
-  DTOFieldType field_type = 4;
-  string defaultValue = 5;
-  string availableValues = 7;
-}
-
-message DTOFieldType {
-  string id = 1;
-  string name = 2;
-  string alias = 3;
-  bool is_custom = 4;
-  repeated string available_sizes = 5;
 }
