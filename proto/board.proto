@@ -29,7 +29,7 @@ message DTOBoard {
   string key = 2; //У задачи должен быть кей ИЛИ проекта
   repeated DTOColumn columns = 3;
   repeated DTOSprint sprints = 4;
-  repeated DTOCardVisualConfig card_configs = 5;
+  repeated DTOCardVisualConfig card_configs = 5; //TODO: добавить фразу Visual
 }
 
 // ____ COLUMN DTOYPES ____ //

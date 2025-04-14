@@ -25,6 +25,8 @@ const (
 // ActionClient is the client API for Action service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+//
+// TODO: + Service
 type ActionClient interface {
 	GetActionsByBoard(ctx context.Context, in *GetActionsByBoardRequest, opts ...grpc.CallOption) (*GetActionsByBoardResponse, error)
 }
@@ -50,6 +52,8 @@ func (c *actionClient) GetActionsByBoard(ctx context.Context, in *GetActionsByBo
 // ActionServer is the server API for Action service.
 // All implementations must embed UnimplementedActionServer
 // for forward compatibility.
+//
+// TODO: + Service
 type ActionServer interface {
 	GetActionsByBoard(context.Context, *GetActionsByBoardRequest) (*GetActionsByBoardResponse, error)
 	mustEmbedUnimplementedActionServer()

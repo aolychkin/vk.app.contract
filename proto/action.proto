@@ -4,6 +4,7 @@ package action;
 
 option go_package = "neo.action.v1;action_v1";
 
+//TODO: + Service
 service Action {
   rpc GetActionsByBoard (GetActionsByBoardRequest) returns (GetActionsByBoardResponse);
 }
@@ -17,8 +18,8 @@ message GetActionsByBoardResponse {
   repeated DTOFieldConfig field_configs = 2;
 }
 
-// _____________________________________________ //
-// _______________ GET BOARD () _______________ //
+// ______________________________________________ //
+// _______________ GET ACTION () _______________ //
 // Сервис предоставляет данные о действиях.
 // Может быть использовано универсально
 // во всех частях системы.
@@ -26,7 +27,7 @@ message GetActionsByBoardResponse {
 message DTOCard {
   string id = 1;
   uint32 order = 2;
-  // string column_id = 3;
+  string column_id = 3;
   DTOAction action = 4;
 }
 

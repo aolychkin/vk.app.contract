@@ -126,7 +126,7 @@ type DTOBoard struct {
 	Key         string                 `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"` //У задачи должен быть кей ИЛИ проекта
 	Columns     []*DTOColumn           `protobuf:"bytes,3,rep,name=columns,proto3" json:"columns,omitempty"`
 	Sprints     []*DTOSprint           `protobuf:"bytes,4,rep,name=sprints,proto3" json:"sprints,omitempty"`
-	CardConfigs []*DTOCardVisualConfig `protobuf:"bytes,5,rep,name=card_configs,json=cardConfigs,proto3" json:"card_configs,omitempty"`
+	CardConfigs []*DTOCardVisualConfig `protobuf:"bytes,5,rep,name=card_configs,json=cardConfigs,proto3" json:"card_configs,omitempty"` //TODO: добавить фразу Visual
 }
 
 func (x *DTOBoard) Reset() {
