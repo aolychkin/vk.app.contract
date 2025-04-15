@@ -28,10 +28,12 @@ message GetActionsByBoardResponse {
 }
 
 message ReorderActionsOnBoardRequest {
-  repeated DTOCard cards = 1;
-  DTOCard current_card = 2;
-  DTOCard target_card = 3;
-  string edge = 4;
+  string current_card_id = 1;
+	float current_card_rank = 2;
+	string target_card_id = 3;
+	float target_card_rank = 4;
+	string edge = 5;
+	bool isCorner = 6;
 }
 
 message ReorderActionsOnBoardResponse {
@@ -43,7 +45,7 @@ message ReorderActionsOnBoardResponse {
 // ______________________ //
 message DTOCard {
   string id = 1;
-  uint32 order = 2;
+  float order = 2;
   string column_id = 3;
   DTOAction action = 4;
 }
