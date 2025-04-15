@@ -4,11 +4,20 @@ package action;
 
 option go_package = "neo.action.v1;action_v1";
 
-//TODO: + Service
-service Action {
+// _____________________________________________ //
+// ________________ ACTIONS () ________________ //
+// Сервис предоставляет данные о действиях.
+// Может быть использовано универсально
+// во всех частях системы.
+// _______________________________________ //
+service ActionService {
   rpc GetActionsByBoard (GetActionsByBoardRequest) returns (GetActionsByBoardResponse);
+  rpc ReorderActionsOnBoard (ReorderActionsOnBoardRequest) returns (ReorderActionsOnBoardResponse);
 }
 
+// _____________________________ //
+// ____ Request / Response ____ //
+// ___________________________ //
 message GetActionsByBoardRequest {
   string board_id = 1;
 }
@@ -18,12 +27,20 @@ message GetActionsByBoardResponse {
   repeated DTOFieldConfig field_configs = 2;
 }
 
-// ______________________________________________ //
-// _______________ GET ACTION () _______________ //
-// Сервис предоставляет данные о действиях.
-// Может быть использовано универсально
-// во всех частях системы.
-// _______________________________________ //
+message ReorderActionsOnBoardRequest {
+  repeated DTOCard cards = 1;
+  DTOCard current_card = 2;
+  DTOCard target_card = 3;
+  string edge = 4;
+}
+
+message ReorderActionsOnBoardResponse {
+  repeated DTOCard cards = 1;
+}
+
+// ________________________ //
+// ____ Card / Action ____ //
+// ______________________ //
 message DTOCard {
   string id = 1;
   uint32 order = 2;
@@ -45,7 +62,9 @@ message DTOActionField {
   string config_id = 3;
 }
 
+// _______________________ //
 // ____ CONFIG TYPES ____ //
+// _____________________ //
 message DTOFieldConfig {
   string id = 1;
   string name = 2;

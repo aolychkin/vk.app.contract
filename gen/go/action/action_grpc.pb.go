@@ -19,105 +19,153 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Action_GetActionsByBoard_FullMethodName = "/action.Action/GetActionsByBoard"
+	ActionService_GetActionsByBoard_FullMethodName     = "/action.ActionService/GetActionsByBoard"
+	ActionService_ReorderActionsOnBoard_FullMethodName = "/action.ActionService/ReorderActionsOnBoard"
 )
 
-// ActionClient is the client API for Action service.
+// ActionServiceClient is the client API for ActionService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// TODO: + Service
-type ActionClient interface {
+// _____________________________________________ //
+// ________________ ACTIONS () ________________ //
+// Сервис предоставляет данные о действиях.
+// Может быть использовано универсально
+// во всех частях системы.
+// _______________________________________ //
+type ActionServiceClient interface {
 	GetActionsByBoard(ctx context.Context, in *GetActionsByBoardRequest, opts ...grpc.CallOption) (*GetActionsByBoardResponse, error)
+	ReorderActionsOnBoard(ctx context.Context, in *ReorderActionsOnBoardRequest, opts ...grpc.CallOption) (*ReorderActionsOnBoardResponse, error)
 }
 
-type actionClient struct {
+type actionServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewActionClient(cc grpc.ClientConnInterface) ActionClient {
-	return &actionClient{cc}
+func NewActionServiceClient(cc grpc.ClientConnInterface) ActionServiceClient {
+	return &actionServiceClient{cc}
 }
 
-func (c *actionClient) GetActionsByBoard(ctx context.Context, in *GetActionsByBoardRequest, opts ...grpc.CallOption) (*GetActionsByBoardResponse, error) {
+func (c *actionServiceClient) GetActionsByBoard(ctx context.Context, in *GetActionsByBoardRequest, opts ...grpc.CallOption) (*GetActionsByBoardResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetActionsByBoardResponse)
-	err := c.cc.Invoke(ctx, Action_GetActionsByBoard_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ActionService_GetActionsByBoard_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ActionServer is the server API for Action service.
-// All implementations must embed UnimplementedActionServer
-// for forward compatibility.
-//
-// TODO: + Service
-type ActionServer interface {
-	GetActionsByBoard(context.Context, *GetActionsByBoardRequest) (*GetActionsByBoardResponse, error)
-	mustEmbedUnimplementedActionServer()
+func (c *actionServiceClient) ReorderActionsOnBoard(ctx context.Context, in *ReorderActionsOnBoardRequest, opts ...grpc.CallOption) (*ReorderActionsOnBoardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReorderActionsOnBoardResponse)
+	err := c.cc.Invoke(ctx, ActionService_ReorderActionsOnBoard_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
-// UnimplementedActionServer must be embedded to have
+// ActionServiceServer is the server API for ActionService service.
+// All implementations must embed UnimplementedActionServiceServer
+// for forward compatibility.
+//
+// _____________________________________________ //
+// ________________ ACTIONS () ________________ //
+// Сервис предоставляет данные о действиях.
+// Может быть использовано универсально
+// во всех частях системы.
+// _______________________________________ //
+type ActionServiceServer interface {
+	GetActionsByBoard(context.Context, *GetActionsByBoardRequest) (*GetActionsByBoardResponse, error)
+	ReorderActionsOnBoard(context.Context, *ReorderActionsOnBoardRequest) (*ReorderActionsOnBoardResponse, error)
+	mustEmbedUnimplementedActionServiceServer()
+}
+
+// UnimplementedActionServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedActionServer struct{}
+type UnimplementedActionServiceServer struct{}
 
-func (UnimplementedActionServer) GetActionsByBoard(context.Context, *GetActionsByBoardRequest) (*GetActionsByBoardResponse, error) {
+func (UnimplementedActionServiceServer) GetActionsByBoard(context.Context, *GetActionsByBoardRequest) (*GetActionsByBoardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetActionsByBoard not implemented")
 }
-func (UnimplementedActionServer) mustEmbedUnimplementedActionServer() {}
-func (UnimplementedActionServer) testEmbeddedByValue()                {}
+func (UnimplementedActionServiceServer) ReorderActionsOnBoard(context.Context, *ReorderActionsOnBoardRequest) (*ReorderActionsOnBoardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReorderActionsOnBoard not implemented")
+}
+func (UnimplementedActionServiceServer) mustEmbedUnimplementedActionServiceServer() {}
+func (UnimplementedActionServiceServer) testEmbeddedByValue()                       {}
 
-// UnsafeActionServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ActionServer will
+// UnsafeActionServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ActionServiceServer will
 // result in compilation errors.
-type UnsafeActionServer interface {
-	mustEmbedUnimplementedActionServer()
+type UnsafeActionServiceServer interface {
+	mustEmbedUnimplementedActionServiceServer()
 }
 
-func RegisterActionServer(s grpc.ServiceRegistrar, srv ActionServer) {
-	// If the following call pancis, it indicates UnimplementedActionServer was
+func RegisterActionServiceServer(s grpc.ServiceRegistrar, srv ActionServiceServer) {
+	// If the following call pancis, it indicates UnimplementedActionServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&Action_ServiceDesc, srv)
+	s.RegisterService(&ActionService_ServiceDesc, srv)
 }
 
-func _Action_GetActionsByBoard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ActionService_GetActionsByBoard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetActionsByBoardRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ActionServer).GetActionsByBoard(ctx, in)
+		return srv.(ActionServiceServer).GetActionsByBoard(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Action_GetActionsByBoard_FullMethodName,
+		FullMethod: ActionService_GetActionsByBoard_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ActionServer).GetActionsByBoard(ctx, req.(*GetActionsByBoardRequest))
+		return srv.(ActionServiceServer).GetActionsByBoard(ctx, req.(*GetActionsByBoardRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Action_ServiceDesc is the grpc.ServiceDesc for Action service.
+func _ActionService_ReorderActionsOnBoard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReorderActionsOnBoardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ActionServiceServer).ReorderActionsOnBoard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ActionService_ReorderActionsOnBoard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ActionServiceServer).ReorderActionsOnBoard(ctx, req.(*ReorderActionsOnBoardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ActionService_ServiceDesc is the grpc.ServiceDesc for ActionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Action_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "action.Action",
-	HandlerType: (*ActionServer)(nil),
+var ActionService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "action.ActionService",
+	HandlerType: (*ActionServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GetActionsByBoard",
-			Handler:    _Action_GetActionsByBoard_Handler,
+			Handler:    _ActionService_GetActionsByBoard_Handler,
+		},
+		{
+			MethodName: "ReorderActionsOnBoard",
+			Handler:    _ActionService_ReorderActionsOnBoard_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
