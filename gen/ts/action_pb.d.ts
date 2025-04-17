@@ -58,6 +58,9 @@ export class ReorderActionsOnBoardRequest extends jspb.Message {
   getNewRank(): number;
   setNewRank(value: number): void;
 
+  getColumnId(): string;
+  setColumnId(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ReorderActionsOnBoardRequest.AsObject;
   static toObject(includeInstance: boolean, msg: ReorderActionsOnBoardRequest): ReorderActionsOnBoardRequest.AsObject;
@@ -72,6 +75,7 @@ export namespace ReorderActionsOnBoardRequest {
   export type AsObject = {
     cardId: string,
     newRank: number,
+    columnId: string,
   }
 }
 

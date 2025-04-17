@@ -595,7 +595,8 @@ proto.action.ReorderActionsOnBoardRequest.prototype.toObject = function(opt_incl
 proto.action.ReorderActionsOnBoardRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
 cardId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-newRank: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0)
+newRank: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
+columnId: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -640,6 +641,10 @@ proto.action.ReorderActionsOnBoardRequest.deserializeBinaryFromReader = function
       var value = /** @type {number} */ (reader.readFloat());
       msg.setNewRank(value);
       break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setColumnId(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -683,6 +688,13 @@ proto.action.ReorderActionsOnBoardRequest.serializeBinaryToWriter = function(mes
       f
     );
   }
+  f = message.getColumnId();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -719,6 +731,24 @@ proto.action.ReorderActionsOnBoardRequest.prototype.getNewRank = function() {
  */
 proto.action.ReorderActionsOnBoardRequest.prototype.setNewRank = function(value) {
   return jspb.Message.setProto3FloatField(this, 2, value);
+};
+
+
+/**
+ * optional string column_id = 3;
+ * @return {string}
+ */
+proto.action.ReorderActionsOnBoardRequest.prototype.getColumnId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.action.ReorderActionsOnBoardRequest} returns this
+ */
+proto.action.ReorderActionsOnBoardRequest.prototype.setColumnId = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 

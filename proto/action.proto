@@ -30,6 +30,7 @@ message GetActionsByBoardResponse {
 message ReorderActionsOnBoardRequest {
   string card_id = 1;
 	float new_rank = 2;
+  string column_id = 3;
 }
 
 message ReorderActionsOnBoardResponse {
