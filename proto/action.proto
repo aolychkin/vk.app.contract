@@ -28,12 +28,8 @@ message GetActionsByBoardResponse {
 }
 
 message ReorderActionsOnBoardRequest {
-  string current_card_id = 1;
-	float current_card_rank = 2;
-	string target_card_id = 3;
-	float target_card_rank = 4;
-	string edge = 5;
-	bool isCorner = 6;
+  string card_id = 1;
+	float new_rank = 2;
 }
 
 message ReorderActionsOnBoardResponse {
