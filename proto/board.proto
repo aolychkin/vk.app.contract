@@ -29,7 +29,8 @@ message DTOBoard {
   string key = 2; //У задачи должен быть кей ИЛИ проекта
   repeated DTOColumn columns = 3;
   repeated DTOSprint sprints = 4;
-  repeated DTOCardVisualConfig card_configs = 5; //TODO: добавить фразу Visual
+  repeated DTOCardConfig card_configs = 5; //TODO: добавить фразу Visual
+  string name = 6;
 }
 
 // ____ COLUMN DTOYPES ____ //
@@ -50,7 +51,14 @@ message DTOSprint {
   string name = 2;
 }
 
-message DTOCardVisualConfig {
+message DTOCardConfig {
+  string id = 1;
+  string name = 2;
+  repeated ActionFieldInCardConfig action_fields = 3;
+  string state = 4;
+}
+
+message ActionFieldInCardConfig {
   string id = 1;
   uint32 row_order = 2;
   uint32 column_order = 3;

@@ -63,9 +63,12 @@ export class DTOBoard extends jspb.Message {
   addSprints(value?: DTOSprint, index?: number): DTOSprint;
 
   clearCardConfigsList(): void;
-  getCardConfigsList(): Array<DTOCardVisualConfig>;
-  setCardConfigsList(value: Array<DTOCardVisualConfig>): void;
-  addCardConfigs(value?: DTOCardVisualConfig, index?: number): DTOCardVisualConfig;
+  getCardConfigsList(): Array<DTOCardConfig>;
+  setCardConfigsList(value: Array<DTOCardConfig>): void;
+  addCardConfigs(value?: DTOCardConfig, index?: number): DTOCardConfig;
+
+  getName(): string;
+  setName(value: string): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): DTOBoard.AsObject;
@@ -83,7 +86,8 @@ export namespace DTOBoard {
     key: string,
     columnsList: Array<DTOColumn.AsObject>,
     sprintsList: Array<DTOSprint.AsObject>,
-    cardConfigsList: Array<DTOCardVisualConfig.AsObject>,
+    cardConfigsList: Array<DTOCardConfig.AsObject>,
+    name: string,
   }
 }
 
@@ -169,7 +173,41 @@ export namespace DTOSprint {
   }
 }
 
-export class DTOCardVisualConfig extends jspb.Message {
+export class DTOCardConfig extends jspb.Message {
+  getId(): string;
+  setId(value: string): void;
+
+  getName(): string;
+  setName(value: string): void;
+
+  clearActionFieldsList(): void;
+  getActionFieldsList(): Array<ActionFieldInCardConfig>;
+  setActionFieldsList(value: Array<ActionFieldInCardConfig>): void;
+  addActionFields(value?: ActionFieldInCardConfig, index?: number): ActionFieldInCardConfig;
+
+  getState(): string;
+  setState(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): DTOCardConfig.AsObject;
+  static toObject(includeInstance: boolean, msg: DTOCardConfig): DTOCardConfig.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: DTOCardConfig, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): DTOCardConfig;
+  static deserializeBinaryFromReader(message: DTOCardConfig, reader: jspb.BinaryReader): DTOCardConfig;
+}
+
+export namespace DTOCardConfig {
+  export type AsObject = {
+    id: string,
+    name: string,
+    actionFieldsList: Array<ActionFieldInCardConfig.AsObject>,
+    state: string,
+  }
+}
+
+export class ActionFieldInCardConfig extends jspb.Message {
   getId(): string;
   setId(value: string): void;
 
@@ -186,16 +224,16 @@ export class DTOCardVisualConfig extends jspb.Message {
   setFieldConfigId(value: string): void;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): DTOCardVisualConfig.AsObject;
-  static toObject(includeInstance: boolean, msg: DTOCardVisualConfig): DTOCardVisualConfig.AsObject;
+  toObject(includeInstance?: boolean): ActionFieldInCardConfig.AsObject;
+  static toObject(includeInstance: boolean, msg: ActionFieldInCardConfig): ActionFieldInCardConfig.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: DTOCardVisualConfig, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): DTOCardVisualConfig;
-  static deserializeBinaryFromReader(message: DTOCardVisualConfig, reader: jspb.BinaryReader): DTOCardVisualConfig;
+  static serializeBinaryToWriter(message: ActionFieldInCardConfig, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ActionFieldInCardConfig;
+  static deserializeBinaryFromReader(message: ActionFieldInCardConfig, reader: jspb.BinaryReader): ActionFieldInCardConfig;
 }
 
-export namespace DTOCardVisualConfig {
+export namespace ActionFieldInCardConfig {
   export type AsObject = {
     id: string,
     rowOrder: number,
