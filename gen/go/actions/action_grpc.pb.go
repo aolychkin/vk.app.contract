@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.3
-// source: action.proto
+// source: actions/action.proto
 
 package action_v1
 
@@ -169,5 +169,5 @@ var ActionService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "action.proto",
+	Metadata: "actions/action.proto",
 }

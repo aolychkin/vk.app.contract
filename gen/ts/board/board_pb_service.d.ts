@@ -1,7 +1,7 @@
 // package: board
-// file: board.proto
+// file: board/board.proto
 
-import * as board_pb from "./board_pb";
+import * as board_board_pb from "../board/board_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
 type BoardServiceGetBoard = {
@@ -9,8 +9,8 @@ type BoardServiceGetBoard = {
   readonly service: typeof BoardService;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof board_pb.GetBoardRequest;
-  readonly responseType: typeof board_pb.GetBoardResponse;
+  readonly requestType: typeof board_board_pb.GetBoardRequest;
+  readonly responseType: typeof board_board_pb.GetBoardResponse;
 };
 
 export class BoardService {
@@ -51,13 +51,13 @@ export class BoardServiceClient {
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
   getBoard(
-    requestMessage: board_pb.GetBoardRequest,
+    requestMessage: board_board_pb.GetBoardRequest,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: board_pb.GetBoardResponse|null) => void
+    callback: (error: ServiceError|null, responseMessage: board_board_pb.GetBoardResponse|null) => void
   ): UnaryResponse;
   getBoard(
-    requestMessage: board_pb.GetBoardRequest,
-    callback: (error: ServiceError|null, responseMessage: board_pb.GetBoardResponse|null) => void
+    requestMessage: board_board_pb.GetBoardRequest,
+    callback: (error: ServiceError|null, responseMessage: board_board_pb.GetBoardResponse|null) => void
   ): UnaryResponse;
 }
 

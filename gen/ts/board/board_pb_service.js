@@ -1,7 +1,7 @@
 // package: board
-// file: board.proto
+// file: board/board.proto
 
-var board_pb = require("./board_pb");
+var board_board_pb = require("../board/board_pb");
 var grpc = require("@improbable-eng/grpc-web").grpc;
 
 var BoardService = (function () {
@@ -15,8 +15,8 @@ BoardService.GetBoard = {
   service: BoardService,
   requestStream: false,
   responseStream: false,
-  requestType: board_pb.GetBoardRequest,
-  responseType: board_pb.GetBoardResponse
+  requestType: board_board_pb.GetBoardRequest,
+  responseType: board_board_pb.GetBoardResponse
 };
 
 exports.BoardService = BoardService;
