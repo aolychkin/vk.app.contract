@@ -167,6 +167,9 @@ export class DTOAction extends jspb.Message {
   getOrder(): number;
   setOrder(value: number): void;
 
+  getColumnId(): string;
+  setColumnId(value: string): void;
+
   getId(): string;
   setId(value: string): void;
 
@@ -201,6 +204,7 @@ export class DTOAction extends jspb.Message {
 export namespace DTOAction {
   export type AsObject = {
     order: number,
+    columnId: string,
     id: string,
     index: number,
     status?: DTOActionStatus.AsObject,

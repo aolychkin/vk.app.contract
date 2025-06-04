@@ -1436,7 +1436,7 @@ proto.board.DTOActionStatus.prototype.setTypeDescription = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.board.DTOAction.repeatedFields_ = [6];
+proto.board.DTOAction.repeatedFields_ = [8];
 
 
 
@@ -1470,8 +1470,9 @@ proto.board.DTOAction.prototype.toObject = function(opt_includeInstance) {
 proto.board.DTOAction.toObject = function(includeInstance, msg) {
   var f, obj = {
 order: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
-id: jspb.Message.getFieldWithDefault(msg, 2, ""),
-index: jspb.Message.getFieldWithDefault(msg, 3, 0),
+columnId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+id: jspb.Message.getFieldWithDefault(msg, 4, ""),
+index: jspb.Message.getFieldWithDefault(msg, 5, 0),
 status: (f = msg.getStatus()) && proto.board.DTOActionStatus.toObject(includeInstance, f),
 type: (f = msg.getType()) && proto.board.DTOActionType.toObject(includeInstance, f),
 fieldsValueList: jspb.Message.toObjectList(msg.getFieldsValueList(),
@@ -1518,23 +1519,27 @@ proto.board.DTOAction.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
+      msg.setColumnId(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
       msg.setId(value);
       break;
-    case 3:
+    case 5:
       var value = /** @type {number} */ (reader.readUint32());
       msg.setIndex(value);
       break;
-    case 4:
+    case 6:
       var value = new proto.board.DTOActionStatus;
       reader.readMessage(value,proto.board.DTOActionStatus.deserializeBinaryFromReader);
       msg.setStatus(value);
       break;
-    case 5:
+    case 7:
       var value = new proto.board.DTOActionType;
       reader.readMessage(value,proto.board.DTOActionType.deserializeBinaryFromReader);
       msg.setType(value);
       break;
-    case 6:
+    case 8:
       var value = new proto.board.DTOActionFieldValue;
       reader.readMessage(value,proto.board.DTOActionFieldValue.deserializeBinaryFromReader);
       msg.addFieldsValue(value);
@@ -1575,24 +1580,31 @@ proto.board.DTOAction.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getId();
+  f = message.getColumnId();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
+  f = message.getId();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
   f = message.getIndex();
   if (f !== 0) {
     writer.writeUint32(
-      3,
+      5,
       f
     );
   }
   f = message.getStatus();
   if (f != null) {
     writer.writeMessage(
-      4,
+      6,
       f,
       proto.board.DTOActionStatus.serializeBinaryToWriter
     );
@@ -1600,7 +1612,7 @@ proto.board.DTOAction.serializeBinaryToWriter = function(message, writer) {
   f = message.getType();
   if (f != null) {
     writer.writeMessage(
-      5,
+      7,
       f,
       proto.board.DTOActionType.serializeBinaryToWriter
     );
@@ -1608,7 +1620,7 @@ proto.board.DTOAction.serializeBinaryToWriter = function(message, writer) {
   f = message.getFieldsValueList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      6,
+      8,
       f,
       proto.board.DTOActionFieldValue.serializeBinaryToWriter
     );
@@ -1635,10 +1647,10 @@ proto.board.DTOAction.prototype.setOrder = function(value) {
 
 
 /**
- * optional string id = 2;
+ * optional string column_id = 2;
  * @return {string}
  */
-proto.board.DTOAction.prototype.getId = function() {
+proto.board.DTOAction.prototype.getColumnId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -1647,17 +1659,35 @@ proto.board.DTOAction.prototype.getId = function() {
  * @param {string} value
  * @return {!proto.board.DTOAction} returns this
  */
-proto.board.DTOAction.prototype.setId = function(value) {
+proto.board.DTOAction.prototype.setColumnId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional uint32 index = 3;
+ * optional string id = 4;
+ * @return {string}
+ */
+proto.board.DTOAction.prototype.getId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.board.DTOAction} returns this
+ */
+proto.board.DTOAction.prototype.setId = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional uint32 index = 5;
  * @return {number}
  */
 proto.board.DTOAction.prototype.getIndex = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
@@ -1666,17 +1696,17 @@ proto.board.DTOAction.prototype.getIndex = function() {
  * @return {!proto.board.DTOAction} returns this
  */
 proto.board.DTOAction.prototype.setIndex = function(value) {
-  return jspb.Message.setProto3IntField(this, 3, value);
+  return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
 /**
- * optional DTOActionStatus status = 4;
+ * optional DTOActionStatus status = 6;
  * @return {?proto.board.DTOActionStatus}
  */
 proto.board.DTOAction.prototype.getStatus = function() {
   return /** @type{?proto.board.DTOActionStatus} */ (
-    jspb.Message.getWrapperField(this, proto.board.DTOActionStatus, 4));
+    jspb.Message.getWrapperField(this, proto.board.DTOActionStatus, 6));
 };
 
 
@@ -1685,7 +1715,7 @@ proto.board.DTOAction.prototype.getStatus = function() {
  * @return {!proto.board.DTOAction} returns this
 */
 proto.board.DTOAction.prototype.setStatus = function(value) {
-  return jspb.Message.setWrapperField(this, 4, value);
+  return jspb.Message.setWrapperField(this, 6, value);
 };
 
 
@@ -1703,17 +1733,17 @@ proto.board.DTOAction.prototype.clearStatus = function() {
  * @return {boolean}
  */
 proto.board.DTOAction.prototype.hasStatus = function() {
-  return jspb.Message.getField(this, 4) != null;
+  return jspb.Message.getField(this, 6) != null;
 };
 
 
 /**
- * optional DTOActionType type = 5;
+ * optional DTOActionType type = 7;
  * @return {?proto.board.DTOActionType}
  */
 proto.board.DTOAction.prototype.getType = function() {
   return /** @type{?proto.board.DTOActionType} */ (
-    jspb.Message.getWrapperField(this, proto.board.DTOActionType, 5));
+    jspb.Message.getWrapperField(this, proto.board.DTOActionType, 7));
 };
 
 
@@ -1722,7 +1752,7 @@ proto.board.DTOAction.prototype.getType = function() {
  * @return {!proto.board.DTOAction} returns this
 */
 proto.board.DTOAction.prototype.setType = function(value) {
-  return jspb.Message.setWrapperField(this, 5, value);
+  return jspb.Message.setWrapperField(this, 7, value);
 };
 
 
@@ -1740,17 +1770,17 @@ proto.board.DTOAction.prototype.clearType = function() {
  * @return {boolean}
  */
 proto.board.DTOAction.prototype.hasType = function() {
-  return jspb.Message.getField(this, 5) != null;
+  return jspb.Message.getField(this, 7) != null;
 };
 
 
 /**
- * repeated DTOActionFieldValue fields_value = 6;
+ * repeated DTOActionFieldValue fields_value = 8;
  * @return {!Array<!proto.board.DTOActionFieldValue>}
  */
 proto.board.DTOAction.prototype.getFieldsValueList = function() {
   return /** @type{!Array<!proto.board.DTOActionFieldValue>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.board.DTOActionFieldValue, 6));
+    jspb.Message.getRepeatedWrapperField(this, proto.board.DTOActionFieldValue, 8));
 };
 
 
@@ -1759,7 +1789,7 @@ proto.board.DTOAction.prototype.getFieldsValueList = function() {
  * @return {!proto.board.DTOAction} returns this
 */
 proto.board.DTOAction.prototype.setFieldsValueList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 6, value);
+  return jspb.Message.setRepeatedWrapperField(this, 8, value);
 };
 
 
@@ -1769,7 +1799,7 @@ proto.board.DTOAction.prototype.setFieldsValueList = function(value) {
  * @return {!proto.board.DTOActionFieldValue}
  */
 proto.board.DTOAction.prototype.addFieldsValue = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 6, opt_value, proto.board.DTOActionFieldValue, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 8, opt_value, proto.board.DTOActionFieldValue, opt_index);
 };
 
 

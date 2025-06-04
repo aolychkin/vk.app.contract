@@ -54,11 +54,12 @@ message DTOActionStatus {
 
 message DTOAction {
   float order = 1; // Parent entity: ActionOrder
-  string id = 2;
-  uint32 index = 3;
-  DTOActionStatus status = 4;
-  DTOActionType type = 5;
-  repeated DTOActionFieldValue fields_value = 6; // ХЗ
+  string column_id = 2; // Parent entity: ActionOrder
+  string id = 4;
+  uint32 index = 5;
+  DTOActionStatus status = 6;
+  DTOActionType type = 7;
+  repeated DTOActionFieldValue fields_value = 8; // ХЗ
 }
 
 message DTOActionFieldValue {

@@ -1,7 +1,7 @@
 // package: action
-// file: actions/action.proto
+// file: action/action.proto
 
-import * as actions_action_pb from "../actions/action_pb";
+import * as action_action_pb from "../action/action_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
 type ActionServiceGetActionsByBoard = {
@@ -9,8 +9,8 @@ type ActionServiceGetActionsByBoard = {
   readonly service: typeof ActionService;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof actions_action_pb.GetActionsByBoardRequest;
-  readonly responseType: typeof actions_action_pb.GetActionsByBoardResponse;
+  readonly requestType: typeof action_action_pb.GetActionsByBoardRequest;
+  readonly responseType: typeof action_action_pb.GetActionsByBoardResponse;
 };
 
 type ActionServiceReorderActionsOnBoard = {
@@ -18,8 +18,8 @@ type ActionServiceReorderActionsOnBoard = {
   readonly service: typeof ActionService;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof actions_action_pb.ReorderActionsOnBoardRequest;
-  readonly responseType: typeof actions_action_pb.ReorderActionsOnBoardResponse;
+  readonly requestType: typeof action_action_pb.ReorderActionsOnBoardRequest;
+  readonly responseType: typeof action_action_pb.ReorderActionsOnBoardResponse;
 };
 
 export class ActionService {
@@ -61,22 +61,22 @@ export class ActionServiceClient {
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
   getActionsByBoard(
-    requestMessage: actions_action_pb.GetActionsByBoardRequest,
+    requestMessage: action_action_pb.GetActionsByBoardRequest,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: actions_action_pb.GetActionsByBoardResponse|null) => void
+    callback: (error: ServiceError|null, responseMessage: action_action_pb.GetActionsByBoardResponse|null) => void
   ): UnaryResponse;
   getActionsByBoard(
-    requestMessage: actions_action_pb.GetActionsByBoardRequest,
-    callback: (error: ServiceError|null, responseMessage: actions_action_pb.GetActionsByBoardResponse|null) => void
+    requestMessage: action_action_pb.GetActionsByBoardRequest,
+    callback: (error: ServiceError|null, responseMessage: action_action_pb.GetActionsByBoardResponse|null) => void
   ): UnaryResponse;
   reorderActionsOnBoard(
-    requestMessage: actions_action_pb.ReorderActionsOnBoardRequest,
+    requestMessage: action_action_pb.ReorderActionsOnBoardRequest,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: actions_action_pb.ReorderActionsOnBoardResponse|null) => void
+    callback: (error: ServiceError|null, responseMessage: action_action_pb.ReorderActionsOnBoardResponse|null) => void
   ): UnaryResponse;
   reorderActionsOnBoard(
-    requestMessage: actions_action_pb.ReorderActionsOnBoardRequest,
-    callback: (error: ServiceError|null, responseMessage: actions_action_pb.ReorderActionsOnBoardResponse|null) => void
+    requestMessage: action_action_pb.ReorderActionsOnBoardRequest,
+    callback: (error: ServiceError|null, responseMessage: action_action_pb.ReorderActionsOnBoardResponse|null) => void
   ): UnaryResponse;
 }
 

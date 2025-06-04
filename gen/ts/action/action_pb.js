@@ -1,4 +1,4 @@
-// source: actions/action.proto
+// source: action/action.proto
 /**
  * @fileoverview
  * @enhanceable

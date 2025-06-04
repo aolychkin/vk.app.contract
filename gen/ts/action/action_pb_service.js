@@ -1,7 +1,7 @@
 // package: action
-// file: actions/action.proto
+// file: action/action.proto
 
-var actions_action_pb = require("../actions/action_pb");
+var action_action_pb = require("../action/action_pb");
 var grpc = require("@improbable-eng/grpc-web").grpc;
 
 var ActionService = (function () {
@@ -15,8 +15,8 @@ ActionService.GetActionsByBoard = {
   service: ActionService,
   requestStream: false,
   responseStream: false,
-  requestType: actions_action_pb.GetActionsByBoardRequest,
-  responseType: actions_action_pb.GetActionsByBoardResponse
+  requestType: action_action_pb.GetActionsByBoardRequest,
+  responseType: action_action_pb.GetActionsByBoardResponse
 };
 
 ActionService.ReorderActionsOnBoard = {
@@ -24,8 +24,8 @@ ActionService.ReorderActionsOnBoard = {
   service: ActionService,
   requestStream: false,
   responseStream: false,
-  requestType: actions_action_pb.ReorderActionsOnBoardRequest,
-  responseType: actions_action_pb.ReorderActionsOnBoardResponse
+  requestType: action_action_pb.ReorderActionsOnBoardRequest,
+  responseType: action_action_pb.ReorderActionsOnBoardResponse
 };
 
 exports.ActionService = ActionService;
