@@ -23,6 +23,34 @@ export namespace GetBoardRequest {
   }
 }
 
+export class UpdateActionBoardOrderingRequest extends jspb.Message {
+  getActionId(): string;
+  setActionId(value: string): void;
+
+  getRankValue(): number;
+  setRankValue(value: number): void;
+
+  getStatusId(): string;
+  setStatusId(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): UpdateActionBoardOrderingRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: UpdateActionBoardOrderingRequest): UpdateActionBoardOrderingRequest.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: UpdateActionBoardOrderingRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): UpdateActionBoardOrderingRequest;
+  static deserializeBinaryFromReader(message: UpdateActionBoardOrderingRequest, reader: jspb.BinaryReader): UpdateActionBoardOrderingRequest;
+}
+
+export namespace UpdateActionBoardOrderingRequest {
+  export type AsObject = {
+    actionId: string,
+    rankValue: number,
+    statusId: string,
+  }
+}
+
 export class GetBoardResponse extends jspb.Message {
   hasBoard(): boolean;
   clearBoard(): void;

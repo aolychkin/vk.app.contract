@@ -7,6 +7,7 @@ option go_package = "neo.board.v1;board_v1";
 //TODO: сделать запросы менее жирными. Отправлять только то, что нужно для модуля доски
 service BoardService {
   rpc GetBoard (GetBoardRequest) returns (GetBoardResponse);
+  rpc UpdateActionBoardOrdering (UpdateActionBoardOrderingRequest) returns (GetBoardResponse);
 }
 
 // _____________________________________________ //
@@ -19,6 +20,12 @@ message GetBoardRequest {
   string id = 1;
   //Сортировка и фильтрация
 }
+message UpdateActionBoardOrderingRequest {
+  string action_id = 1;
+  float rank_value = 2;
+  string status_id = 3;
+}
+
 message GetBoardResponse {
   DTOBoard board = 1;
 }

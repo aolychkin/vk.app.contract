@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BoardService_GetBoard_FullMethodName = "/board.BoardService/GetBoard"
+	BoardService_GetBoard_FullMethodName                  = "/board.BoardService/GetBoard"
+	BoardService_UpdateActionBoardOrdering_FullMethodName = "/board.BoardService/UpdateActionBoardOrdering"
 )
 
 // BoardServiceClient is the client API for BoardService service.
@@ -29,6 +30,7 @@ const (
 // TODO: сделать запросы менее жирными. Отправлять только то, что нужно для модуля доски
 type BoardServiceClient interface {
 	GetBoard(ctx context.Context, in *GetBoardRequest, opts ...grpc.CallOption) (*GetBoardResponse, error)
+	UpdateActionBoardOrdering(ctx context.Context, in *UpdateActionBoardOrderingRequest, opts ...grpc.CallOption) (*GetBoardResponse, error)
 }
 
 type boardServiceClient struct {
@@ -49,6 +51,16 @@ func (c *boardServiceClient) GetBoard(ctx context.Context, in *GetBoardRequest, 
 	return out, nil
 }
 
+func (c *boardServiceClient) UpdateActionBoardOrdering(ctx context.Context, in *UpdateActionBoardOrderingRequest, opts ...grpc.CallOption) (*GetBoardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBoardResponse)
+	err := c.cc.Invoke(ctx, BoardService_UpdateActionBoardOrdering_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BoardServiceServer is the server API for BoardService service.
 // All implementations must embed UnimplementedBoardServiceServer
 // for forward compatibility.
@@ -56,6 +68,7 @@ func (c *boardServiceClient) GetBoard(ctx context.Context, in *GetBoardRequest, 
 // TODO: сделать запросы менее жирными. Отправлять только то, что нужно для модуля доски
 type BoardServiceServer interface {
 	GetBoard(context.Context, *GetBoardRequest) (*GetBoardResponse, error)
+	UpdateActionBoardOrdering(context.Context, *UpdateActionBoardOrderingRequest) (*GetBoardResponse, error)
 	mustEmbedUnimplementedBoardServiceServer()
 }
 
@@ -68,6 +81,9 @@ type UnimplementedBoardServiceServer struct{}
 
 func (UnimplementedBoardServiceServer) GetBoard(context.Context, *GetBoardRequest) (*GetBoardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBoard not implemented")
+}
+func (UnimplementedBoardServiceServer) UpdateActionBoardOrdering(context.Context, *UpdateActionBoardOrderingRequest) (*GetBoardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateActionBoardOrdering not implemented")
 }
 func (UnimplementedBoardServiceServer) mustEmbedUnimplementedBoardServiceServer() {}
 func (UnimplementedBoardServiceServer) testEmbeddedByValue()                      {}
@@ -108,6 +124,24 @@ func _BoardService_GetBoard_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BoardService_UpdateActionBoardOrdering_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateActionBoardOrderingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BoardServiceServer).UpdateActionBoardOrdering(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BoardService_UpdateActionBoardOrdering_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BoardServiceServer).UpdateActionBoardOrdering(ctx, req.(*UpdateActionBoardOrderingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BoardService_ServiceDesc is the grpc.ServiceDesc for BoardService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -118,6 +152,10 @@ var BoardService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetBoard",
 			Handler:    _BoardService_GetBoard_Handler,
+		},
+		{
+			MethodName: "UpdateActionBoardOrdering",
+			Handler:    _BoardService_UpdateActionBoardOrdering_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

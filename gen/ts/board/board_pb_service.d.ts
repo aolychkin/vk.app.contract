@@ -13,9 +13,19 @@ type BoardServiceGetBoard = {
   readonly responseType: typeof board_board_pb.GetBoardResponse;
 };
 
+type BoardServiceUpdateActionBoardOrdering = {
+  readonly methodName: string;
+  readonly service: typeof BoardService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof board_board_pb.UpdateActionBoardOrderingRequest;
+  readonly responseType: typeof board_board_pb.GetBoardResponse;
+};
+
 export class BoardService {
   static readonly serviceName: string;
   static readonly GetBoard: BoardServiceGetBoard;
+  static readonly UpdateActionBoardOrdering: BoardServiceUpdateActionBoardOrdering;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -57,6 +67,15 @@ export class BoardServiceClient {
   ): UnaryResponse;
   getBoard(
     requestMessage: board_board_pb.GetBoardRequest,
+    callback: (error: ServiceError|null, responseMessage: board_board_pb.GetBoardResponse|null) => void
+  ): UnaryResponse;
+  updateActionBoardOrdering(
+    requestMessage: board_board_pb.UpdateActionBoardOrderingRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: board_board_pb.GetBoardResponse|null) => void
+  ): UnaryResponse;
+  updateActionBoardOrdering(
+    requestMessage: board_board_pb.UpdateActionBoardOrderingRequest,
     callback: (error: ServiceError|null, responseMessage: board_board_pb.GetBoardResponse|null) => void
   ): UnaryResponse;
 }
