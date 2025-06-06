@@ -24,6 +24,7 @@ message UpdateActionBoardOrderingRequest {
   string action_id = 1;
   float rank_value = 2;
   string status_id = 3;
+  string column_id = 4;
 }
 
 message GetBoardResponse {

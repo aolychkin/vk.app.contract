@@ -33,6 +33,9 @@ export class UpdateActionBoardOrderingRequest extends jspb.Message {
   getStatusId(): string;
   setStatusId(value: string): void;
 
+  getColumnId(): string;
+  setColumnId(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UpdateActionBoardOrderingRequest.AsObject;
   static toObject(includeInstance: boolean, msg: UpdateActionBoardOrderingRequest): UpdateActionBoardOrderingRequest.AsObject;
@@ -48,6 +51,7 @@ export namespace UpdateActionBoardOrderingRequest {
     actionId: string,
     rankValue: number,
     statusId: string,
+    columnId: string,
   }
 }
 

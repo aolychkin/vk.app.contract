@@ -472,7 +472,8 @@ proto.board.UpdateActionBoardOrderingRequest.toObject = function(includeInstance
   var f, obj = {
 actionId: jspb.Message.getFieldWithDefault(msg, 1, ""),
 rankValue: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
-statusId: jspb.Message.getFieldWithDefault(msg, 3, "")
+statusId: jspb.Message.getFieldWithDefault(msg, 3, ""),
+columnId: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -521,6 +522,10 @@ proto.board.UpdateActionBoardOrderingRequest.deserializeBinaryFromReader = funct
       var value = /** @type {string} */ (reader.readString());
       msg.setStatusId(value);
       break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setColumnId(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -568,6 +573,13 @@ proto.board.UpdateActionBoardOrderingRequest.serializeBinaryToWriter = function(
   if (f.length > 0) {
     writer.writeString(
       3,
+      f
+    );
+  }
+  f = message.getColumnId();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
       f
     );
   }
@@ -625,6 +637,24 @@ proto.board.UpdateActionBoardOrderingRequest.prototype.getStatusId = function() 
  */
 proto.board.UpdateActionBoardOrderingRequest.prototype.setStatusId = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string column_id = 4;
+ * @return {string}
+ */
+proto.board.UpdateActionBoardOrderingRequest.prototype.getColumnId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.board.UpdateActionBoardOrderingRequest} returns this
+ */
+proto.board.UpdateActionBoardOrderingRequest.prototype.setColumnId = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
