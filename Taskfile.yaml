@@ -16,6 +16,7 @@ tasks:
       - gg
     desc: "Generate code from proto files"
     cmds:
+      - export PATH="$PATH:$(go env GOPATH)/bin"
       - protoc 
         -I proto proto/*/*.proto 
         --go_out=./gen/go/ 
